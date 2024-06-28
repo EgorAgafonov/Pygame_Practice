@@ -36,6 +36,7 @@ class Player(pygame.sprite.Sprite):
             self.current_sprite += 1
             if self.current_sprite >= len(self.sprites):
                 self.current_sprite = 0
+                self.is_animating = False
             self.image = self.sprites[self.current_sprite]
 
 
@@ -54,19 +55,22 @@ moving_sprites = pygame.sprite.Group()
 player = Player(100, 100)
 moving_sprites.add(player)
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.KEYDOWN:
-            player.animate()
 
-    screen.fill((255, 255, 255))
-    moving_sprites.draw(screen)
-    moving_sprites.update()
-    pygame.display.flip()
-    clock.tick(60)
+def run_game():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                player.animate()
 
-# if __name__ == '__main__':
-#     run_game()
+        screen.fill((255, 255, 255))
+        moving_sprites.draw(screen)
+        moving_sprites.update()
+        pygame.display.flip()
+        clock.tick(60)
+
+
+if __name__ == '__main__':
+    run_game()

@@ -8,8 +8,8 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Game screen
-screen_width = 200
-screen_height = 200
+screen_width = 1290
+screen_height = 1024
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Sprite animation')
 
@@ -22,11 +22,14 @@ moving_sprites.add(player)
 def run_game():
     while True:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
             if event.type == pygame.KEYDOWN:
-                player.animate()
+                if event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit()
+                elif event.key == pygame.K_SPACE:
+                    player.animate()
+
+
 
         screen.fill((255, 255, 255))
         moving_sprites.draw(screen)

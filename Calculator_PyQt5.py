@@ -60,6 +60,30 @@ class MainWindow(qtw.QWidget):
     def num_press(self, key_number):
         self.temp_nums.append(key_number)
         temp_string = ''.join(self.temp_nums)
+        if self.fin_nums:
+            self.result_field.setText(''.join(self.fin_nums) + temp_string)
+        else:
+            self.result_field.setText(temp_string)
+
+    def func_press(self, operator):
+        temp_string = ''.join(self.temp_nums)
+        self.fin_nums.append(temp_string)
+        self.fin_nums.append(operator)
+        self.temp_nums = []
+        self.result_field.setText(''.join(self.fin_nums))
+
+    def func_result(self):
+        fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
+        result_string = eval(fin_string)
+        fin_string += '='
+        fin_string += str(result_string)
+        self.result_field.setText(fin_string)
+
+    def clear_calc(self):
+        self.result_field.clear()
+        self.temp_nums = []
+        self.fin_nums = []
+
 
 
 app = qtw.QApplication([])

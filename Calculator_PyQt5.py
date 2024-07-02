@@ -15,27 +15,27 @@ class MainWindow(qtw.QWidget):
         self.show()
 
     def keypad(self):
-        """"""
+        """Создание кнопок калькулятора и сетки для их размещения внутри """
 
         container = qtw.QWidget()
         container.setLayout(qtw.QGridLayout())
         # Create buttons objects
-        btn_result = qtw.QPushButton('ВВОД', clicked = self.func_result)
-        btn_clear = qtw.QPushButton('СБРОС', clicked = self.clear_calc)
-        btn_9 = qtw.QPushButton('9', clicked = lambda: self.num_press('9'))
-        btn_8 = qtw.QPushButton('8', clicked = lambda: self.num_press('8'))
-        btn_7 = qtw.QPushButton('7', clicked = lambda: self.num_press('7'))
-        btn_6 = qtw.QPushButton('6', clicked = lambda: self.num_press('6'))
-        btn_5 = qtw.QPushButton('5', clicked = lambda: self.num_press('5'))
-        btn_4 = qtw.QPushButton('4', clicked = lambda: self.num_press('4'))
-        btn_3 = qtw.QPushButton('3', clicked = lambda: self.num_press('3'))
-        btn_2 = qtw.QPushButton('2', clicked = lambda: self.num_press('2'))
-        btn_1 = qtw.QPushButton('1', clicked = lambda: self.num_press('1'))
-        btn_0 = qtw.QPushButton('0', clicked = lambda: self.num_press('0'))
-        btn_plus = qtw.QPushButton('+', clicked = lambda: self.func_press('+'))
-        btn_mins = qtw.QPushButton('-', clicked = lambda: self.func_press('-'))
-        btn_mult = qtw.QPushButton('*', clicked = lambda: self.func_press('*'))
-        btn_divd = qtw.QPushButton('÷', clicked = lambda: self.func_press('/'))
+        btn_result = qtw.QPushButton('ВВОД', clicked=self.func_result)
+        btn_clear = qtw.QPushButton('СБРОС', clicked=self.clear_calc)
+        btn_9 = qtw.QPushButton('9', clicked=lambda: self.num_press('9'))
+        btn_8 = qtw.QPushButton('8', clicked=lambda: self.num_press('8'))
+        btn_7 = qtw.QPushButton('7', clicked=lambda: self.num_press('7'))
+        btn_6 = qtw.QPushButton('6', clicked=lambda: self.num_press('6'))
+        btn_5 = qtw.QPushButton('5', clicked=lambda: self.num_press('5'))
+        btn_4 = qtw.QPushButton('4', clicked=lambda: self.num_press('4'))
+        btn_3 = qtw.QPushButton('3', clicked=lambda: self.num_press('3'))
+        btn_2 = qtw.QPushButton('2', clicked=lambda: self.num_press('2'))
+        btn_1 = qtw.QPushButton('1', clicked=lambda: self.num_press('1'))
+        btn_0 = qtw.QPushButton('0', clicked=lambda: self.num_press('0'))
+        btn_plus = qtw.QPushButton('+', clicked=lambda: self.func_press('+'))
+        btn_mins = qtw.QPushButton('-', clicked=lambda: self.func_press('-'))
+        btn_mult = qtw.QPushButton('*', clicked=lambda: self.func_press('*'))
+        btn_divd = qtw.QPushButton('÷', clicked=lambda: self.func_press('/'))
 
         # Adding buttons(widgets) to the layout
         container.layout().addWidget(self.result_field, 0, 0, 1, 4, )
@@ -58,6 +58,8 @@ class MainWindow(qtw.QWidget):
         self.layout().addWidget(container)
 
     def num_press(self, key_number):
+        """Метод обработки числовых символов калькулятора"""
+
         self.temp_nums.append(key_number)
         temp_string = ''.join(self.temp_nums)
         if self.fin_nums:
@@ -66,6 +68,8 @@ class MainWindow(qtw.QWidget):
             self.result_field.setText(temp_string)
 
     def func_press(self, operator):
+        """Метод обработки знаков операторов числовых выражений калькулятора"""
+
         temp_string = ''.join(self.temp_nums)
         self.fin_nums.append(temp_string)
         self.fin_nums.append(operator)
@@ -73,6 +77,8 @@ class MainWindow(qtw.QWidget):
         self.result_field.setText(''.join(self.fin_nums))
 
     def func_result(self):
+        """Метод для расчета результата числового выражения калькулятора"""
+
         fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
         result_string = eval(fin_string)
         fin_string += '='
@@ -80,10 +86,11 @@ class MainWindow(qtw.QWidget):
         self.result_field.setText(fin_string)
 
     def clear_calc(self):
+        """Метод для очистки поля ввода калькулятора(удаляет из него все символы)"""
+
         self.result_field.clear()
         self.temp_nums = []
         self.fin_nums = []
-
 
 
 app = qtw.QApplication([])

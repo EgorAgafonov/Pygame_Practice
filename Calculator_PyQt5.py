@@ -15,7 +15,7 @@ class MainWindow(qtw.QWidget):
         self.show()
 
     def keypad(self):
-        """Создание кнопок калькулятора и сетки для их размещения внутри """
+        """Создание кнопок калькулятора и сетки для их размещения внутри MainWindow """
 
         container = qtw.QWidget()
         container.setLayout(qtw.QGridLayout())
@@ -60,8 +60,9 @@ class MainWindow(qtw.QWidget):
     def num_press(self, key_number):
         """Метод обработки числовых символов калькулятора"""
 
-        self.temp_nums.append(key_number)
-        temp_string = ''.join(self.temp_nums)
+        self.temp_nums.append(key_number)  # добавление в список строкового значения числа, "указанного на кнопке"
+        temp_string = ''.join(self.temp_nums)  # создание переменной содержащей одну объединенную строку из элементов
+        # списка self.temp_nums
         if self.fin_nums:
             self.result_field.setText(''.join(self.fin_nums) + temp_string)
         else:

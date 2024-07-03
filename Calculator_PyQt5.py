@@ -63,7 +63,8 @@ class MainWindow(qtw.QWidget):
         self.temp_nums.append(key_number)  # добавление в список строкового значения числа, "указанного на кнопке"
         temp_string = ''.join(self.temp_nums)  # создание переменной содержащей одну объединенную строку из элементов
         # списка self.temp_nums
-        if self.fin_nums:
+
+        if self.fin_nums:  # если список не пустой:
             self.result_field.setText(''.join(self.fin_nums) + temp_string)
         else:
             self.result_field.setText(temp_string)
@@ -81,6 +82,7 @@ class MainWindow(qtw.QWidget):
         """Метод для расчета результата числового выражения калькулятора"""
 
         fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
+        if fin_string.isalpha():
         result_string = eval(fin_string)
         fin_string += '='
         fin_string += str(result_string)

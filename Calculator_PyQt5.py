@@ -7,6 +7,7 @@ class MainWindow(qtw.QWidget):
     def __init__(self):
         super().__init__()
         self.result_field = qtw.QLineEdit()
+        self.result_field.setReadOnly(True)
         self.setWindowTitle('Калькулятор')
         self.setLayout(qtw.QVBoxLayout())
         self.keypad()
